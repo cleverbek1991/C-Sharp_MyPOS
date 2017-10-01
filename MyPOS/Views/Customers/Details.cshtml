@@ -1,0 +1,130 @@
+@model MyPOS.Models.CustomerViewModels.CustomerDetailViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    var group = Model.Customer.OrderMenu.GroupBy(i => i.MenuItemID);
+    var groupCategory = Model.MenuItem.GroupBy(i => i.MenuCategoryID);
+}
+
+<h2>Complete Order</h2>
+<div class="flex">
+    <div class="item invoice">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Customer.CustomerName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Customer.CustomerName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Customer.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Customer.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Customer.Phone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Customer.Phone)
+            </dd>
+        </dl>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h5>Products</h5>
+                    </th>
+                    <th>
+                        <h5>Quantity</h5>
+                    </th>
+                    <th>
+                        <h5>Price</h5>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in group)
+                {
+                    foreach (var i in item)
+                    {
+                        <tr>
+                            <td>
+                                <h5>@i.MenuItem.MITitle</h5>
+                            </td>
+                            <td>
+                                <h5>@i.MenuItem.OrderMenu.Count(m => m.OrderID == i.OrderID)</h5>
+                            </td>
+                            <td>
+                                <h5>@i.MenuItem.Price</h5>
+                            </td>
+                            @if (@i.Orders.PaymentTypeID == null)
+                            {
+                                <td>
+                                    <form asp-controller="Orders" asp-action="DeleteProduct" asp-route-id="@i.OrderMenuID">
+                                        <div class="form-group">
+                                            <input type="submit" value="Delete" class="btn btn-danger" />
+                                        </div>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                        break;
+                    }
+                }
+            </tbody>
+            <tfoot>
+
+                <tr>
+                    <th>
+                        Subtotal: @Model.OrderMenu.Where(m => m.OrderID == m.Orders.OrderID && m.Orders.PaymentTypeID == null).Sum(o => o.MenuItem.Price * 0.0925 + (o.MenuItem.Price)).ToString("0.00")
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        Tax: @Model.OrderMenu.Where(m => m.OrderID == m.Orders.OrderID && m.Orders.PaymentTypeID == null).Sum(o => o.MenuItem.Price * 0.0925).ToString("0.00")
+                    </th>
+                </tr>
+
+            </tfoot>
+        </table>
+        @foreach (var item in Model.Order)
+        {
+            if (item.PaymentTypeID == null)
+            {
+            <div>
+                <a class="btn btn-success menu-button" asp-controller="Orders" asp-action="Edit" asp-route-id="@item.OrderID">Purchase</a>
+            </div>
+                break;
+            }
+        }
+    </div>
+
+    <div class="item menu">
+        @foreach (var item in Model.GroupedItems)
+        {
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="btn btn-info menu-button">@item.TypeName</th>
+                        @foreach (var j in item.MenuItem)
+                        {
+                        <td>
+                            <form asp-controller="Orders" asp-action="AddProduct" asp-route-id="@j.MenuItemID" asp-route-custID="@Model.Customer.CustomerID">
+                                <input type="submit" value="@j.MITitle" class="btn btn-primary menu-button " />
+                            </form>
+                        </td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+<hr />
+<div class="col-lg-push-12">
+    <a asp-action="Edit" asp-route-id="@Model.Customer.CustomerID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

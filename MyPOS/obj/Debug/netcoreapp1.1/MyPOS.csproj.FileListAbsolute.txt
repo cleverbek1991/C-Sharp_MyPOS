@@ -1,0 +1,11 @@
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\bin\Debug\netcoreapp1.1\MyPOS.deps.json
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\bin\Debug\netcoreapp1.1\MyPOS.runtimeconfig.json
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\bin\Debug\netcoreapp1.1\MyPOS.runtimeconfig.dev.json
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\bin\Debug\netcoreapp1.1\MyPOS.dll
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\bin\Debug\netcoreapp1.1\MyPOS.pdb
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\obj\Debug\netcoreapp1.1\MyPOS.csprojResolveAssemblyReference.cache
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\obj\Debug\netcoreapp1.1\MyPOS.csproj.CoreCompileInputs.cache
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\obj\Debug\netcoreapp1.1\MyPOS.AssemblyInfo.cs
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\obj\Debug\netcoreapp1.1\MyPOS.dll
+C:\Users\Dilshod\workspace\csharp\POS\MyPOS\MyPOS\obj\Debug\netcoreapp1.1\MyPOS.pdb
